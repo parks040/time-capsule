@@ -1,0 +1,159 @@
+:root{
+  --bg: #05060A;
+  --lilac: #6B63FF; /* dark blue lilac */
+  --text: rgba(245,245,255,0.92);
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; background:var(--bg); overflow:hidden; }
+
+body{
+  position:relative;
+  /* subtle haze */
+  background:
+    radial-gradient(700px 500px at 70% 30%, rgba(107,99,255,0.18), transparent 60%),
+    radial-gradient(600px 420px at 20% 75%, rgba(107,99,255,0.10), transparent 55%),
+    var(--bg);
+}
+
+/* ---------- Start Screen ---------- */
+.start{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.start-inner{
+  text-align:center;
+  padding:24px;
+}
+.title{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color:var(--text);
+  font-size: clamp(22px, 3vw, 40px);
+  letter-spacing: 0.22em;
+}
+.hint{
+  margin-top:14px;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", sans-serif;
+  color: rgba(245,245,255,0.55);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+}
+
+.hidden{ display:none; }
+
+/* ---------- Main Scene ---------- */
+.scene{
+  position:fixed; inset:0;
+}
+
+/* Memory fragment container */
+.fragment{
+  position:absolute;
+  width: var(--w);
+  height: var(--h);
+  border-radius: 16px;           /* easy + clean */
+  overflow:hidden;
+  transform: translate3d(0,0,0);
+  will-change: transform, filter;
+  animation: drift var(--dur) ease-in-out infinite alternate;
+  filter: blur(1.2px) brightness(0.78) contrast(1.15) saturate(0.2);
+}
+
+/* Duotone overlay (tint layer) */
+.fragment::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(107,99,255,0.35);
+  mix-blend-mode: color;
+  pointer-events:none;
+}
+
+.fragment img, .fragment video{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transform: scale(1.03);
+}
+
+/* Hover = wake memory */
+.fragment:hover{
+  filter: blur(0px) brightness(0.92) contrast(1.22) saturate(0.35);
+  transform: scale(1.06);
+  z-index: 50;
+}
+
+/* Click flash (0.5s full color) */
+.fragment.flash{
+  filter: none !important;
+}
+.fragment.flash::after{
+  opacity: 0 !important;
+}
+
+/* Drift animation */
+@keyframes drift{
+  from { transform: translate3d(var(--dx1), var(--dy1), 0) rotate(var(--r1)); }
+  to   { transform: translate3d(var(--dx2), var(--dy2), 0) rotate(var(--r2)); }
+}
+
+/* Thought text near fragment */
+.thought{
+  position:fixed;
+  z-index: 80;
+  max-width: 260px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(10,12,20,0.35);
+  border: 1px solid rgba(245,245,255,0.12);
+  color: rgba(245,245,255,0.85);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(6px);
+  animation: thoughtFade 1.8s ease forwards;
+  pointer-events:none;
+}
+@keyframes thoughtFade{
+  0%   { opacity:0; transform: translate3d(0, 8px, 0); }
+  12%  { opacity:1; }
+  70%  { opacity:1; }
+  100% { opacity:0; transform: translate3d(0,-14px,0); }
+}
+
+/* Glitch punch (body class) */
+body.glitch{
+  animation: screenJitter 0.12s steps(2, end) infinite;
+  filter: contrast(1.1) saturate(1.2);
+}
+@keyframes screenJitter{
+  0% { transform: translate(0,0); }
+  50%{ transform: translate(1px,-1px); }
+  100%{ transform: translate(-1px,1px); }
+}
+
+.punch{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 120;
+  pointer-events:none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: 0.18em;
+  color: rgba(245,245,255,0.92);
+  text-transform: uppercase;
+  font-size: clamp(28px, 5vw, 72px);
+  mix-blend-mode: screen;
+  text-shadow: 0 0 18px rgba(107,99,255,0.35);
+}
+.punch.glitchText{
+  animation: textFlicker 0.18s steps(2,end) infinite;
+}
+@keyframes textFlicker{
+  0%{ transform: translateX(0); opacity: 1; }
+  50%{ transform: translateX(2px); opacity: 0.8; }
+  100%{ transform: translateX(-2px); opacity: 1; }
+}
