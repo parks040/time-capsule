@@ -32,25 +32,47 @@ for (let i = 38; i <= 44; i++) {
 
 // Soft inner voice lines
 const THOUGHTS = [
-  "I miss it, quietly.",
-  "Some moments stayed with me.",
-  "I smiled without noticing.",
-  "I want to keep this.",
-  "It felt lighter back then.",
-  "I’m learning to be okay.",
-  "I made it through.",
-  "I didn’t give up.",
-  "Some feelings don’t leave.",
-  "I forgive myself.",
+  "I learned to live with it.",
+  "Some things softened over time.",
+  "I made peace with myself.",
+  "I let it pass.",
+  "I stayed quiet and breathed.",
+
+  "이제는 괜찮다고 말할 수 있어.",
+  "조금은 내려놓을 수 있게 됐어.",
+  "그때의 나를 이해하게 됐어.",
+  "시간이 나를 안아준 것 같아.",
+  "이 기억도 나의 일부야.",
+
+  "I don’t need answers anymore.",
+  "I stopped asking why.",
+  "It doesn’t hurt the same way now.",
+  "I survived gently.",
+  "I’m still here, calmly."
 ];
+
 
 // Glitch punch lines
 const PUNCH_LINES = [
-  "REMEMBER THIS",
-  "DO NOT ERASE ME",
-  "I WAS HERE",
-  "STAY WITH ME",
+  "NO, I’M NOT OVER THIS",
+  "THIS STILL HURTS",
+  "DON’T LIE TO YOURSELF",
+  "I PRETENDED TOO LONG",
+  "THIS WASN’T OK",
+
+  "아직 괜찮지 않아",
+  "나는 아무렇지 않았던 적 없어",
+  "이건 그냥 지나간 일이 아니야",
+  "그때 너무 아팠어",
+  "왜 아무도 몰랐지",
+
+  "I NEVER SAID THIS OUT LOUD",
+  "I WAS BREAKING",
+  "THIS IS THE TRUTH",
+  "STOP MINIMIZING IT",
+  "I STILL FEEL IT"
 ];
+
 
 const startEl = document.getElementById("start");
 const sceneEl = document.getElementById("scene");

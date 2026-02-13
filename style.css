@@ -9,11 +9,8 @@ html,body{ height:100%; margin:0; background:var(--bg); overflow:hidden; }
 
 body{
   position:relative;
-  /* subtle haze */
-  background:
-    radial-gradient(700px 500px at 70% 30%, rgba(107,99,255,0.18), transparent 60%),
-    radial-gradient(600px 420px at 20% 75%, rgba(27, 24, 77, 0.1), transparent 55%),
-    var(--bg);
+  background: var(--bg); /* pure black */
+  font-family: "Courier New", Courier, monospace; /* ✅ global font */
 }
 
 /* ---------- Start Screen ---------- */
@@ -27,14 +24,14 @@ body{
   padding:24px;
 }
 .title{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Courier New", Courier, monospace;
   color:var(--text);
   font-size: clamp(22px, 3vw, 40px);
   letter-spacing: 0.22em;
 }
 .hint{
   margin-top:14px;
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", sans-serif;
+  font-family: "Courier New", Courier, monospace;
   color: rgba(245,245,255,0.55);
   font-size: 12px;
   letter-spacing: 0.12em;
@@ -53,7 +50,7 @@ body{
   position:absolute;
   width: var(--w);
   height: var(--h);
-  border-radius: 16px;           /* easy + clean */
+  border-radius: 16px;
   overflow:hidden;
   transform: translate3d(0,0,0);
   will-change: transform, filter;
@@ -108,7 +105,7 @@ body{
   background: rgba(10,12,20,0.35);
   border: 1px solid rgba(245,245,255,0.12);
   color: rgba(245,245,255,0.85);
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", sans-serif;
+  font-family: "Courier New", Courier, monospace; /* ✅ match theme */
   font-size: 13px;
   letter-spacing: 0.02em;
   backdrop-filter: blur(6px);
@@ -122,15 +119,17 @@ body{
   100% { opacity:0; transform: translate3d(0,-14px,0); }
 }
 
-/* Glitch punch (body class) */
+/* ---------- Glitch Punch ---------- */
 body.glitch{
-  animation: screenJitter 0.12s steps(2, end) infinite;
-  filter: contrast(1.1) saturate(1.2);
+  animation: screenJitter 0.06s steps(2, end) infinite; /* ✅ stronger */
+  filter: contrast(1.15) saturate(1.25);
 }
 @keyframes screenJitter{
-  0% { transform: translate(0,0); }
-  50%{ transform: translate(1px,-1px); }
-  100%{ transform: translate(-1px,1px); }
+  0%   { transform: translate(0,0) rotate(0deg); }
+  25%  { transform: translate(2px,-2px) rotate(0.15deg); }
+  50%  { transform: translate(-3px,2px) rotate(-0.2deg); }
+  75%  { transform: translate(2px,3px) rotate(0.18deg); }
+  100% { transform: translate(-2px,-3px) rotate(-0.12deg); }
 }
 
 .punch{
@@ -141,19 +140,27 @@ body.glitch{
   justify-content:center;
   z-index: 120;
   pointer-events:none;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  letter-spacing: 0.18em;
-  color: rgba(245,245,255,0.92);
+
+  /* ✅ Rubik Glitch for punch only */
+  font-family: "Rubik Glitch", system-ui, sans-serif;
+  letter-spacing: 0.12em;
+  color: rgba(245,245,255,0.95);
   text-transform: uppercase;
-  font-size: clamp(28px, 5vw, 72px);
+
+  /* ✅ bigger */
+  font-size: clamp(48px, 8vw, 140px);
+
   mix-blend-mode: screen;
-  text-shadow: 0 0 18px rgba(107,99,255,0.35);
+  text-shadow: 0 0 22px rgba(107,99,255,0.45);
 }
+
 .punch.glitchText{
-  animation: textFlicker 0.18s steps(2,end) infinite;
+  animation: textFlicker 0.08s steps(2,end) infinite; /* ✅ faster + harsher */
 }
 @keyframes textFlicker{
-  0%{ transform: translateX(0); opacity: 1; }
-  50%{ transform: translateX(2px); opacity: 0.8; }
-  100%{ transform: translateX(-2px); opacity: 1; }
+  0%   { transform: translate(0,0) skewX(0deg); opacity: 1; }
+  25%  { transform: translate(6px,-3px) skewX(6deg); opacity: 0.85; }
+  50%  { transform: translate(-8px,4px) skewX(-8deg); opacity: 1; }
+  75%  { transform: translate(5px,2px) skewX(10deg); opacity: 0.75; }
+  100% { transform: translate(-6px,-4px) skewX(-6deg); opacity: 1; }
 }
