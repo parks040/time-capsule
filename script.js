@@ -4,14 +4,31 @@
 // =========================
 
 // How many files you have (1..66)
-const MAX_MEMORY = 66;
+const MAX_MEMORY = 44;
 
 // Candidate extensions (because yours are mixed: JPG/JPEG/PNG and mp4/MP4)
-const IMAGE_EXTS = ["jpeg", "jpg", "png", "JPEG", "JPG", "PNG"];
-const VIDEO_EXTS = ["mp4", "MP4"];
+const IMAGE_EXTS = ["webp"];
+const VIDEO_EXTS = ["mp4"];
 
 // Will be filled automatically
 const FRAGMENTS = [];
+
+// images: memory-1.webp ~ memory-37.webp
+for (let i = 1; i <= 37; i++) {
+  FRAGMENTS.push({
+    type: "image",
+    src: `assets/memory-${i}.webp`
+  });
+}
+
+// videos: memory-38.mp4 ~ memory-44.mp4
+for (let i = 38; i <= 44; i++) {
+  FRAGMENTS.push({
+    type: "video",
+    src: `assets/memory-${i}.mp4`
+  });
+}
+
 
 // Soft inner voice lines
 const THOUGHTS = [
