@@ -60,12 +60,6 @@ const PUNCH_LINES = [
   "I PRETENDED TOO LONG",
   "THIS WASN’T OK",
 
-  "아직 괜찮지 않아",
-  "나는 아무렇지 않았던 적 없어",
-  "이건 그냥 지나간 일이 아니야",
-  "그때 너무 아팠어",
-  "왜 아무도 몰랐지",
-
   "I NEVER SAID THIS OUT LOUD",
   "I WAS BREAKING",
   "THIS IS THE TRUTH",

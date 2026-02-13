@@ -3,18 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Touch to Remember</title>
 
-  <!-- 🔹 Rubik Glitch font (for glitch punch text) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+ <!-- Rubik Pixels font (for glitch punch text) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap" rel="stylesheet">
 
-  <!-- 🔹 Your CSS -->
+<!-- Inter font (Roc Grotesk Thin alternative for title) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&display=swap" rel="stylesheet">
+
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+
+  <!-- ---------- Start Screen ---------- -->
   <div id="start" class="start">
     <div class="start-inner">
       <div class="title">TOUCH TO REMEMBER</div>
@@ -22,10 +29,14 @@
     </div>
   </div>
 
+  <!-- ---------- Main Scene ---------- -->
   <div id="scene" class="scene hidden">
+    <!-- Glitch punch text -->
     <div id="punch" class="punch hidden"></div>
   </div>
 
+  <!-- Main script -->
   <script src="script.js"></script>
 </body>
 </html>
+

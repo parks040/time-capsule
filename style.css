@@ -1,34 +1,47 @@
 :root{
   --bg: #05060A;
-  --lilac: #6B63FF; /* dark blue lilac */
+  --lilac: #6B63FF;
   --text: rgba(245,245,255,0.92);
 }
 
 *{ box-sizing:border-box; }
-html,body{ height:100%; margin:0; background:var(--bg); overflow:hidden; }
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg);
+  overflow:hidden;
+}
 
 body{
   position:relative;
   background: var(--bg); /* pure black */
-  font-family: "Courier New", Courier, monospace; /* ✅ global font */
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* ---------- Start Screen ---------- */
 .start{
-  position:fixed; inset:0;
-  display:flex; align-items:center; justify-content:center;
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
 }
+
 .start-inner{
   text-align:center;
   padding:24px;
 }
+
 .title{
-  font-family: "Courier New", Courier, monospace;
-  color:var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 100;
+  color: var(--text);
   font-size: clamp(22px, 3vw, 40px);
-  letter-spacing: 0.22em;
+  letter-spacing: 0.32em; /* Roc Grotesk 느낌 내는 핵심 */
 }
+
+
 .hint{
   margin-top:14px;
   font-family: "Courier New", Courier, monospace;
@@ -42,46 +55,49 @@ body{
 
 /* ---------- Main Scene ---------- */
 .scene{
-  position:fixed; inset:0;
+  position:fixed;
+  inset:0;
 }
 
-/* Memory fragment container */
+/* ---------- Memory Fragment ---------- */
 .fragment{
   position:absolute;
   width: var(--w);
   height: var(--h);
   border-radius: 16px;
   overflow:hidden;
-  transform: translate3d(0,0,0);
   will-change: transform, filter;
   animation: drift var(--dur) ease-in-out infinite alternate;
   filter: blur(1.2px) brightness(0.78) contrast(1.15) saturate(0.2);
 }
 
-/* Duotone overlay (tint layer) */
+/* duotone tint */
 .fragment::after{
   content:"";
-  position:absolute; inset:0;
-  background: rgba(35, 32, 98, 0.35);
+  position:absolute;
+  inset:0;
+  background: rgba(35,32,98,0.35);
   mix-blend-mode: color;
   pointer-events:none;
 }
 
-.fragment img, .fragment video{
-  width:100%; height:100%;
+.fragment img,
+.fragment video{
+  width:100%;
+  height:100%;
   object-fit:cover;
   display:block;
   transform: scale(1.03);
 }
 
-/* Hover = wake memory */
+/* hover — memory waking */
 .fragment:hover{
-  filter: blur(0px) brightness(0.92) contrast(1.22) saturate(0.35);
+  filter: blur(0) brightness(0.92) contrast(1.22) saturate(0.35);
   transform: scale(1.06);
   z-index: 50;
 }
 
-/* Click flash (0.5s full color) */
+/* click — brief color flash */
 .fragment.flash{
   filter: none !important;
 }
@@ -89,78 +105,88 @@ body{
   opacity: 0 !important;
 }
 
-/* Drift animation */
+/* floating motion */
 @keyframes drift{
-  from { transform: translate3d(var(--dx1), var(--dy1), 0) rotate(var(--r1)); }
-  to   { transform: translate3d(var(--dx2), var(--dy2), 0) rotate(var(--r2)); }
+  from{
+    transform: translate3d(var(--dx1), var(--dy1), 0)
+               rotate(var(--r1));
+  }
+  to{
+    transform: translate3d(var(--dx2), var(--dy2), 0)
+               rotate(var(--r2));
+  }
 }
 
-/* Thought text near fragment */
+/* ---------- Thought Text ---------- */
 .thought{
   position:fixed;
-  z-index: 80;
-  max-width: 260px;
-  padding: 6px 10px;
-  border-radius: 999px;
+  z-index:80;
+  max-width:260px;
+  padding:6px 10px;
+  border-radius:999px;
   background: rgba(10,12,20,0.35);
-  border: 1px solid rgba(245,245,255,0.12);
+  border:1px solid rgba(245,245,255,0.12);
   color: rgba(245,245,255,0.85);
-  font-family: "Courier New", Courier, monospace; /* ✅ match theme */
-  font-size: 13px;
-  letter-spacing: 0.02em;
+  font-family: "Courier New", Courier, monospace;
+  font-size:13px;
+  letter-spacing:0.02em;
   backdrop-filter: blur(6px);
   animation: thoughtFade 1.8s ease forwards;
   pointer-events:none;
 }
+
 @keyframes thoughtFade{
-  0%   { opacity:0; transform: translate3d(0, 8px, 0); }
+  0%   { opacity:0; transform: translateY(8px); }
   12%  { opacity:1; }
   70%  { opacity:1; }
-  100% { opacity:0; transform: translate3d(0,-14px,0); }
+  100% { opacity:0; transform: translateY(-14px); }
 }
 
-/* ---------- Glitch Punch ---------- */
+/* ---------- Glitch Mode ---------- */
 body.glitch{
-  animation: screenJitter 0.06s steps(2, end) infinite; /* ✅ stronger */
+  animation: screenJitter 0.06s steps(2,end) infinite;
   filter: contrast(1.15) saturate(1.25);
 }
+
 @keyframes screenJitter{
-  0%   { transform: translate(0,0) rotate(0deg); }
-  25%  { transform: translate(2px,-2px) rotate(0.15deg); }
-  50%  { transform: translate(-3px,2px) rotate(-0.2deg); }
-  75%  { transform: translate(2px,3px) rotate(0.18deg); }
-  100% { transform: translate(-2px,-3px) rotate(-0.12deg); }
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(2px,-2px); }
+  50%  { transform: translate(-3px,2px); }
+  75%  { transform: translate(2px,3px); }
+  100% { transform: translate(-2px,-3px); }
 }
 
+/* ---------- Glitch Punch Text ---------- */
 .punch{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index: 120;
+  z-index:120;
   pointer-events:none;
 
-  /* ✅ Rubik Glitch for punch only */
-  font-family: "Rubik Glitch", system-ui, sans-serif;
+  font-family: "Rubik Pixels", system-ui, sans-serif;
   letter-spacing: 0.12em;
   color: rgba(245,245,255,0.95);
   text-transform: uppercase;
 
-  /* ✅ bigger */
-  font-size: clamp(48px, 8vw, 140px);
+  /* controlled size */
+  font-size: clamp(36px, 5.5vw, 96px);
 
   mix-blend-mode: screen;
-  text-shadow: 0 0 22px rgba(107,99,255,0.45);
+  text-shadow: 0 0 18px rgba(107,99,255,0.35);
 }
 
 .punch.glitchText{
-  animation: textFlicker 0.08s steps(2,end) infinite; /* ✅ faster + harsher */
+  animation: textFlicker 0.12s steps(2,end) infinite;
 }
+
 @keyframes textFlicker{
-  0%   { transform: translate(0,0) skewX(0deg); opacity: 1; }
-  25%  { transform: translate(6px,-3px) skewX(6deg); opacity: 0.85; }
-  50%  { transform: translate(-8px,4px) skewX(-8deg); opacity: 1; }
-  75%  { transform: translate(5px,2px) skewX(10deg); opacity: 0.75; }
-  100% { transform: translate(-6px,-4px) skewX(-6deg); opacity: 1; }
+  0%   { transform: translate(0,0); opacity:1; }
+  25%  { transform: translate(3px,-2px); opacity:0.85; }
+  50%  { transform: translate(-4px,3px); opacity:1; }
+  75%  { transform: translate(2px,1px); opacity:0.8; }
+  100% { transform: translate(-3px,-2px); opacity:1; }
 }
+
