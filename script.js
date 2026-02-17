@@ -83,7 +83,7 @@ async function playBGM() {
   const t = audioCtx.currentTime;
   gainNode.gain.cancelScheduledValues(t);
   gainNode.gain.setValueAtTime(0, t);
-  gainNode.gain.linearRampToValueAtTime(0.35, t + 2.0);
+  gainNode.gain.linearRampToValueAtTime(0.10, t + 2.0);
 }
 
 function audioGlitchOn() {
